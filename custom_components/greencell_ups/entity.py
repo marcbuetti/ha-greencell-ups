@@ -18,12 +18,16 @@ class GCUPSEntity(CoordinatorEntity[GCUPSCoordinator]):
     # Values that only exist while the app sees the UPS on USB. Without the link the app
     # serves placeholders (-1, failed=True, ...) - those must not look plausible.
     _needs_usb = True
+    _entity_domain: str
 
     def __init__(self, coordinator: GCUPSCoordinator, description: EntityDescription) -> None:
         super().__init__(coordinator)
         self.entity_description = description
         entry = coordinator.config_entry
         self._attr_unique_id = f"{entry.entry_id}_{description.key}"
+        # Language-independent entity_id (sensor.gc_ups_battery_level, ...) so the example
+        # dashboard works regardless of the HA language. A second UPS gets "_2" from HA.
+        self.entity_id = f"{self._entity_domain}.gc_ups_{description.key}"
         data = coordinator.data
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},

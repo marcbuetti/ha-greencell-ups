@@ -100,6 +100,9 @@ async def test_setup_and_states(hass: HomeAssistant, aioclient_mock) -> None:
     _mock_app(aioclient_mock)
     await _setup(hass)
     assert _state(hass, "sensor", "status").state == "online"
+    # language-independent entity_ids, used by the example dashboard
+    assert hass.states.get("sensor.gc_ups_status").state == "online"
+    assert hass.states.get("binary_sensor.gc_ups_mains_power").state == "on"
     assert float(_state(hass, "sensor", "battery_level").state) == 100
     assert float(_state(hass, "sensor", "output_power").state) == 108
     assert _state(hass, "sensor", "temperature").state == "unknown"  # -1 = no probe

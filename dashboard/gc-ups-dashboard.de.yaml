@@ -1,0 +1,116 @@
+# Green Cell USV – Beispiel-Dashboard (nur eingebaute Karten, keine HACS-Karten nötig)
+# Einstellungen → Dashboards → Dashboard hinzufügen → „Neues Dashboard von Grund auf“ → öffnen
+#   → ⋮ → Bearbeiten → ⋮ → „Raw-Konfigurationseditor“ → einfügen → Speichern.
+title: USV
+views:
+  - title: USV
+    path: ups
+    icon: mdi:power-plug-battery
+    type: sections
+    max_columns: 3
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Status
+            icon: mdi:power-plug-battery
+            badges:
+              - type: entity
+                entity: binary_sensor.gc_ups_mains_power
+                show_state: true
+                color: green
+              - type: entity
+                entity: binary_sensor.gc_ups_usb_connected
+                show_state: true
+          - type: tile
+            entity: sensor.gc_ups_status
+            name: Status
+            color: green
+            grid_options:
+              columns: 12
+          - type: gauge
+            entity: sensor.gc_ups_battery_level
+            name: Akku
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              green: 60
+              yellow: 30
+              red: 0
+          - type: gauge
+            entity: sensor.gc_ups_load
+            name: Last
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              green: 0
+              yellow: 60
+              red: 85
+          - type: tile
+            entity: sensor.gc_ups_output_power
+            name: Ausgangsleistung
+            color: amber
+          - type: tile
+            entity: binary_sensor.gc_ups_charging
+            name: Lädt
+            color: green
+      - type: grid
+        cards:
+          - type: heading
+            heading: Verlauf (24 h)
+            icon: mdi:chart-line
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: sensor.gc_ups_battery_level
+                name: Akku
+              - entity: sensor.gc_ups_load
+                name: Last
+            grid_options:
+              columns: 12
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: sensor.gc_ups_input_voltage
+                name: Eingangsspannung
+              - entity: sensor.gc_ups_output_voltage
+                name: Ausgangsspannung
+            grid_options:
+              columns: 12
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: binary_sensor.gc_ups_mains_power
+                name: Netz
+            grid_options:
+              columns: 12
+      - type: grid
+        cards:
+          - type: heading
+            heading: Details
+            icon: mdi:information-outline
+          - type: entities
+            state_color: true
+            entities:
+              - entity: sensor.gc_ups_battery_voltage
+                name: Akkuspannung
+              - entity: sensor.gc_ups_input_voltage
+                name: Eingangsspannung
+              - entity: sensor.gc_ups_output_voltage
+                name: Ausgangsspannung
+              - entity: sensor.gc_ups_input_frequency
+                name: Frequenz
+              - entity: sensor.gc_ups_temperature
+                name: Temperatur
+              - entity: binary_sensor.gc_ups_on_battery
+              - entity: binary_sensor.gc_ups_battery_low
+              - entity: binary_sensor.gc_ups_fault
+              - entity: binary_sensor.gc_ups_avr_active
+              - entity: binary_sensor.gc_ups_usb_connected
+                name: USB-Verbindung
+              - entity: sensor.gc_ups_rated_power
+              - entity: sensor.gc_ups_rated_capacity
+            grid_options:
+              columns: 12

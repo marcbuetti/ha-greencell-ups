@@ -1,0 +1,116 @@
+# Green Cell UPS – example dashboard (built-in cards only, no HACS cards needed)
+# Settings → Dashboards → Add dashboard → "New dashboard from scratch" → open it
+#   → ⋮ → Edit → ⋮ → "Raw configuration editor" → paste this → Save.
+title: UPS
+views:
+  - title: UPS
+    path: ups
+    icon: mdi:power-plug-battery
+    type: sections
+    max_columns: 3
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Status
+            icon: mdi:power-plug-battery
+            badges:
+              - type: entity
+                entity: binary_sensor.gc_ups_mains_power
+                show_state: true
+                color: green
+              - type: entity
+                entity: binary_sensor.gc_ups_usb_connected
+                show_state: true
+          - type: tile
+            entity: sensor.gc_ups_status
+            name: Status
+            color: green
+            grid_options:
+              columns: 12
+          - type: gauge
+            entity: sensor.gc_ups_battery_level
+            name: Battery
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              green: 60
+              yellow: 30
+              red: 0
+          - type: gauge
+            entity: sensor.gc_ups_load
+            name: Load
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              green: 0
+              yellow: 60
+              red: 85
+          - type: tile
+            entity: sensor.gc_ups_output_power
+            name: Output power
+            color: amber
+          - type: tile
+            entity: binary_sensor.gc_ups_charging
+            name: Charging
+            color: green
+      - type: grid
+        cards:
+          - type: heading
+            heading: History (24 h)
+            icon: mdi:chart-line
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: sensor.gc_ups_battery_level
+                name: Battery
+              - entity: sensor.gc_ups_load
+                name: Load
+            grid_options:
+              columns: 12
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: sensor.gc_ups_input_voltage
+                name: Input voltage
+              - entity: sensor.gc_ups_output_voltage
+                name: Output voltage
+            grid_options:
+              columns: 12
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: binary_sensor.gc_ups_mains_power
+                name: Mains
+            grid_options:
+              columns: 12
+      - type: grid
+        cards:
+          - type: heading
+            heading: Details
+            icon: mdi:information-outline
+          - type: entities
+            state_color: true
+            entities:
+              - entity: sensor.gc_ups_battery_voltage
+                name: Battery voltage
+              - entity: sensor.gc_ups_input_voltage
+                name: Input voltage
+              - entity: sensor.gc_ups_output_voltage
+                name: Output voltage
+              - entity: sensor.gc_ups_input_frequency
+                name: Frequency
+              - entity: sensor.gc_ups_temperature
+                name: Temperature
+              - entity: binary_sensor.gc_ups_on_battery
+              - entity: binary_sensor.gc_ups_battery_low
+              - entity: binary_sensor.gc_ups_fault
+              - entity: binary_sensor.gc_ups_avr_active
+              - entity: binary_sensor.gc_ups_usb_connected
+                name: USB link
+              - entity: sensor.gc_ups_rated_power
+              - entity: sensor.gc_ups_rated_capacity
+            grid_options:
+              columns: 12

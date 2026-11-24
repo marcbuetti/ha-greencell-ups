@@ -1,12 +1,24 @@
-# Green Cell UPS for Home Assistant (GC UPS App)
+<p align="center">
+  <img src="custom_components/greencell_ups/brand/icon@2x.png" width="120" alt="Green Cell UPS icon">
+</p>
 
-[Deutsch](README.de.md)
+<h1 align="center">Green Cell UPS for Home Assistant</h1>
+
+<p align="center">
+  <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg" alt="HACS Custom"></a>
+  <img src="https://img.shields.io/badge/status-early%20access%20beta-orange.svg" alt="Early access beta">
+  <a href="https://github.com/marcbuetti/ha-greencell-ups/releases"><img src="https://img.shields.io/github/v/release/marcbuetti/ha-greencell-ups?include_prereleases&label=release" alt="Release"></a>
+  <a href="https://github.com/marcbuetti/ha-greencell-ups/actions/workflows/validate.yml"><img src="https://github.com/marcbuetti/ha-greencell-ups/actions/workflows/validate.yml/badge.svg" alt="Validate"></a>
+</p>
+
+<p align="center"><a href="README.de.md">🇩🇪 Deutsche Anleitung</a></p>
 
 Home Assistant integration for **Green Cell UPS units** connected via USB to a PC that runs
 the vendor's **GC UPS App**. The app has a built-in web server (Angular UI + JSON API); this
 integration logs in to that API and polls it locally — no cloud, no NUT driver needed.
 
-> Early beta. Not affiliated with Green Cell / CSG S.A.
+> [!WARNING]
+> **Early access beta.** Tested against the API of the GC UPS App 1.1.x with a Green Cell line-interactive UPS. Please [open an issue](https://github.com/marcbuetti/ha-greencell-ups/issues/new/choose) with your diagnostics file if a value is missing or wrong.
 
 ## What you get
 
@@ -35,21 +47,44 @@ Shutdown commands (`shutdownOrder`, `shutdownAndRestoreOrder`) and the long batt
    installed — or headless in Docker, see [fajfer/gcups](https://github.com/fajfer/gcups).
 2. In the app: **Settings → enable HTTP server** (default port 8080) and set a password.
    Check in a browser: `http://<pc>:8080` shows the UI, `http://<pc>:8080/api/status` answers `1`.
-3. Home Assistant 2025.2 or newer.
+3. Home Assistant **2025.2** or newer (the integration icon needs **2026.3+**).
 
 ## Installation
 
-**HACS:** ⋮ → Custom repositories → `https://github.com/marcbuetti/ha-greencell-ups`,
-category *Integration* → install → restart HA.
+### HACS (recommended)
 
-**Manual:** copy `custom_components/greencell_ups` to `<config>/custom_components/` and restart.
+[![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=marcbuetti&repository=ha-greencell-ups&category=integration)
 
-Then *Settings → Devices & services → Add integration → Green Cell UPS*:
+Or manually in HACS:
+1. HACS → ⋮ → **Custom repositories**
+2. Repository: `https://github.com/marcbuetti/ha-greencell-ups`, type: **Integration** → Add
+3. Search for **Green Cell UPS** → Download
+4. Restart Home Assistant
 
-- **Host:** IP or name of the PC, optionally with port (`10.0.0.20` or `10.0.0.20:8085`)
-- **Password:** the one from "Connect remotely" in the web UI. There is no user name.
+### Manual
 
-Options: update interval (default 10 s) and *Allow control* (adds the two buttons).
+Copy `custom_components/greencell_ups` to `<config>/custom_components/greencell_ups` and restart Home Assistant.
+
+## Configuration
+
+[![Open your Home Assistant instance and start setting up Green Cell UPS.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=greencell_ups)
+
+Or: **Settings → Devices & services → Add integration → Green Cell UPS**
+
+| Field | Value |
+|---|---|
+| Host | IP or name of the PC running the app, optionally with port (`10.0.0.20` or `10.0.0.20:8085`) |
+| Password | the one from "Connect remotely" in the app's web UI — there is no user name |
+
+**Configure** on the integration: polling interval (default 10 s) and *Allow control* (adds the self-test and beeper buttons). **Reconfigure** changes the address if the PC gets a new IP.
+
+## Dashboard
+
+[`dashboard/gc-ups-dashboard.yaml`](dashboard/gc-ups-dashboard.yaml) ([German](dashboard/gc-ups-dashboard.de.yaml)) is a ready-made dashboard: status, battery and load gauges, output power, 24 h history and details. Built-in cards only.
+
+**Settings → Dashboards → Add dashboard → New dashboard from scratch** → open it → ⋮ → Edit → ⋮ → **Raw configuration editor** → paste → Save.
+
+Entity IDs don't depend on your HA language (e.g. `sensor.gc_ups_battery_level`), so the dashboard works as-is. A second UPS gets `_2` appended.
 
 ## API notes (measured on a real installation)
 
@@ -107,4 +142,10 @@ pip install aiohttp pytest pytest-asyncio
 python -m pytest tests
 ```
 
-MIT License.
+## Disclaimer
+
+Community project, **not affiliated with or endorsed by Green Cell / CSG S.A.** The integration only talks to the GC UPS App on your own PC: read access, plus the two optional harmless commands.
+
+## License
+
+[MIT](LICENSE)

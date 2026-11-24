@@ -103,6 +103,7 @@ async def async_setup_entry(
 
 
 class GCUPSBinarySensor(GCUPSEntity, BinarySensorEntity):
+    _entity_domain = "binary_sensor"
     entity_description: GCUPSBinaryDescription
 
     def __init__(self, coordinator, description: GCUPSBinaryDescription) -> None:

@@ -51,6 +51,7 @@ async def async_setup_entry(
 
 
 class GCUPSButton(GCUPSEntity, ButtonEntity):
+    _entity_domain = "button"
     entity_description: GCUPSButtonDescription
 
     async def async_press(self) -> None:

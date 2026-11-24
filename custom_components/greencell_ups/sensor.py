@@ -182,6 +182,7 @@ async def async_setup_entry(
 
 
 class GCUPSSensor(GCUPSEntity, SensorEntity):
+    _entity_domain = "sensor"
     entity_description: GCUPSSensorDescription
 
     def __init__(self, coordinator, description: GCUPSSensorDescription) -> None:
