@@ -1,0 +1,138 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect GC UPS App",
+        "description": "Enter the address of the PC running the Green Cell GC UPS App (USB-connected UPS). Enable the HTTP server in the app's settings first; default port is 8080. The password is the one for \"Connect remotely\" in the web UI - there is no user name.",
+        "data": {
+          "host": "Host (IP or hostname, optional :port)",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "New password",
+        "data": {
+          "password": "Password"
+        }
+      },
+      "reconfigure": {
+        "title": "Change address",
+        "data": {
+          "host": "Host (IP or hostname, optional :port)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach the GC UPS App. Is the PC on and the HTTP server enabled?",
+      "invalid_auth": "Password rejected.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This GC UPS App is already configured.",
+      "reauth_successful": "Password updated.",
+      "reconfigure_successful": "Address updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_interval": "Update interval (seconds)",
+          "enable_controls": "Allow control (battery self-test, beeper)"
+        },
+        "data_description": {
+          "enable_controls": "Adds buttons for a 10-second battery test and toggling the beeper. Shutdown commands are never exposed."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "online": "Online",
+          "on_battery": "On battery",
+          "battery_low": "Battery low",
+          "test": "Self-test",
+          "fault": "Fault",
+          "shutdown": "Shutdown pending",
+          "disconnected": "UPS not connected (USB)"
+        }
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
+      },
+      "input_voltage": {
+        "name": "Input voltage"
+      },
+      "input_voltage_fault": {
+        "name": "Input voltage (fault)"
+      },
+      "output_voltage": {
+        "name": "Output voltage"
+      },
+      "input_frequency": {
+        "name": "Input frequency"
+      },
+      "load": {
+        "name": "Load"
+      },
+      "output_power": {
+        "name": "Output power (estimated)"
+      },
+      "rated_power": {
+        "name": "Rated power"
+      },
+      "rated_capacity": {
+        "name": "Rated capacity"
+      },
+      "battery_voltage_nominal": {
+        "name": "Battery voltage (nominal)"
+      },
+      "input_voltage_nominal": {
+        "name": "Input voltage (nominal)"
+      }
+    },
+    "binary_sensor": {
+      "usb_connected": {
+        "name": "USB connection"
+      },
+      "mains_power": {
+        "name": "Mains power"
+      },
+      "on_battery": {
+        "name": "On battery"
+      },
+      "battery_low": {
+        "name": "Battery low"
+      },
+      "charging": {
+        "name": "Charging"
+      },
+      "fault": {
+        "name": "Fault"
+      },
+      "shutdown_active": {
+        "name": "Shutdown pending"
+      },
+      "test_in_progress": {
+        "name": "Self-test running"
+      },
+      "avr_active": {
+        "name": "AVR active"
+      },
+      "beeper": {
+        "name": "Beeper"
+      }
+    },
+    "button": {
+      "short_test": {
+        "name": "Battery self-test (10 s)"
+      },
+      "beeper_toggle": {
+        "name": "Toggle beeper"
+      }
+    }
+  }
+}

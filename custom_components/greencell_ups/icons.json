@@ -1,0 +1,35 @@
+{
+  "entity": {
+    "sensor": {
+      "status": {
+        "default": "mdi:power-plug-battery",
+        "state": {
+          "online": "mdi:power-plug-battery",
+          "on_battery": "mdi:battery-arrow-down",
+          "battery_low": "mdi:battery-alert-variant-outline",
+          "test": "mdi:battery-sync",
+          "fault": "mdi:alert-octagon",
+          "shutdown": "mdi:power",
+          "disconnected": "mdi:usb-port"
+        }
+      },
+      "battery_voltage": { "default": "mdi:car-battery" },
+      "input_voltage": { "default": "mdi:transmission-tower-import" },
+      "input_voltage_fault": { "default": "mdi:flash-alert" },
+      "output_voltage": { "default": "mdi:power-socket-de" },
+      "load": { "default": "mdi:gauge" },
+      "output_power": { "default": "mdi:flash" },
+      "rated_power": { "default": "mdi:flash-outline" },
+      "rated_capacity": { "default": "mdi:flash-outline" }
+    },
+    "binary_sensor": {
+      "usb_connected": { "default": "mdi:usb" },
+      "avr_active": { "default": "mdi:sine-wave" },
+      "beeper": { "default": "mdi:volume-high", "state": { "off": "mdi:volume-off" } }
+    },
+    "button": {
+      "short_test": { "default": "mdi:battery-sync" },
+      "beeper_toggle": { "default": "mdi:volume-source" }
+    }
+  }
+}

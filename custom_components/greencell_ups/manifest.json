@@ -1,0 +1,13 @@
+{
+  "domain": "greencell_ups",
+  "name": "Green Cell UPS (GC UPS App)",
+  "codeowners": ["@marcbuetti"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/marcbuetti/ha-greencell-ups",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/marcbuetti/ha-greencell-ups/issues",
+  "requirements": [],
+  "version": "0.1.0-beta.1"
+}

@@ -1,0 +1,138 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "GC UPS App verbinden",
+        "description": "Adresse des PCs, auf dem die Green Cell GC UPS App läuft (USV per USB angeschlossen). Vorher in der App unter Einstellungen den HTTP-Server einschalten; Standard-Port ist 8080. Das Passwort ist das aus „Connect remotely“ der Weboberfläche – einen Benutzernamen gibt es nicht.",
+        "data": {
+          "host": "Host (IP oder Name, optional :Port)",
+          "password": "Passwort"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Neues Passwort",
+        "data": {
+          "password": "Passwort"
+        }
+      },
+      "reconfigure": {
+        "title": "Adresse ändern",
+        "data": {
+          "host": "Host (IP oder Name, optional :Port)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "GC UPS App nicht erreichbar. Läuft der PC und ist der HTTP-Server eingeschaltet?",
+      "invalid_auth": "Passwort abgelehnt.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Diese GC UPS App ist bereits eingerichtet.",
+      "reauth_successful": "Passwort aktualisiert.",
+      "reconfigure_successful": "Adresse aktualisiert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_interval": "Abfrageintervall (Sekunden)",
+          "enable_controls": "Steuerung erlauben (Akku-Selbsttest, Signalton)"
+        },
+        "data_description": {
+          "enable_controls": "Fügt Tasten für einen 10-Sekunden-Akkutest und zum Umschalten des Signaltons hinzu. Abschaltbefehle werden nie angeboten."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "online": "Netzbetrieb",
+          "on_battery": "Akkubetrieb",
+          "battery_low": "Akku schwach",
+          "test": "Selbsttest",
+          "fault": "Störung",
+          "shutdown": "Abschaltung läuft",
+          "disconnected": "USV nicht verbunden (USB)"
+        }
+      },
+      "battery_voltage": {
+        "name": "Akkuspannung"
+      },
+      "input_voltage": {
+        "name": "Eingangsspannung"
+      },
+      "input_voltage_fault": {
+        "name": "Eingangsspannung (Fehler)"
+      },
+      "output_voltage": {
+        "name": "Ausgangsspannung"
+      },
+      "input_frequency": {
+        "name": "Netzfrequenz"
+      },
+      "load": {
+        "name": "Last"
+      },
+      "output_power": {
+        "name": "Ausgangsleistung (geschätzt)"
+      },
+      "rated_power": {
+        "name": "Nennleistung"
+      },
+      "rated_capacity": {
+        "name": "Nennkapazität"
+      },
+      "battery_voltage_nominal": {
+        "name": "Akkuspannung (nominal)"
+      },
+      "input_voltage_nominal": {
+        "name": "Eingangsspannung (nominal)"
+      }
+    },
+    "binary_sensor": {
+      "usb_connected": {
+        "name": "USB-Verbindung"
+      },
+      "mains_power": {
+        "name": "Netzspannung"
+      },
+      "on_battery": {
+        "name": "Akkubetrieb"
+      },
+      "battery_low": {
+        "name": "Akku schwach"
+      },
+      "charging": {
+        "name": "Lädt"
+      },
+      "fault": {
+        "name": "Störung"
+      },
+      "shutdown_active": {
+        "name": "Abschaltung läuft"
+      },
+      "test_in_progress": {
+        "name": "Selbsttest läuft"
+      },
+      "avr_active": {
+        "name": "AVR aktiv"
+      },
+      "beeper": {
+        "name": "Signalton"
+      }
+    },
+    "button": {
+      "short_test": {
+        "name": "Akku-Selbsttest (10 s)"
+      },
+      "beeper_toggle": {
+        "name": "Signalton umschalten"
+      }
+    }
+  }
+}
